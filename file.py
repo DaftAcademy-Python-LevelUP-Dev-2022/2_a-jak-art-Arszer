@@ -30,9 +30,29 @@ def sums_of_str_elements_are_equal(func):
     return inner
 
 def format_output(*required_keys):
-    pass
+    def decorator(func):
+        def inner(*args):
+            keys = required_keys
+            received_dict = func(*args)
+            new_dict = {}
+            for i in keys:
+                value = ''
+                x = i.split("__")
+                for j in x:
+                    if value != '':
+                        value += ' '
+                    if j in received_dict:
+                        if received_dict[j] == '':
+                            value = "Empty Value"
+                        else:
+                            value += received_dict[j]
+                    else:
+                        raise ValueError
+                new_dict[i] = value
+            return new_dict
+        return inner
+    return decorator
 
 
 def add_method_to_instance(klass):
     pass
-
