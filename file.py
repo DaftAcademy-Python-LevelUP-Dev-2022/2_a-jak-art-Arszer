@@ -43,7 +43,7 @@ def format_output(*required_keys):
                         value += ' '
                     if j in received_dict:
                         if received_dict[j] == '':
-                            value = "Empty Value"
+                            value = "Empty value"
                         else:
                             value += received_dict[j]
                     else:
