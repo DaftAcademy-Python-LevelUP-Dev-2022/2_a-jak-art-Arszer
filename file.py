@@ -4,10 +4,30 @@ def greeter(func):
         return f'Aloha {name.title()}'
     return actual_greeter
 
-
 def sums_of_str_elements_are_equal(func):
-    pass
-
+    def inner(*args):
+        txt = func(*args)
+        txt_split = txt.split()
+        numbers = [[], []]
+        k = 0
+        for i in txt_split:
+            negative = False
+            for j in i:
+                if j == '-':
+                    negative = True
+                    continue
+                if negative == True:
+                    numbers[k].append(-int(j))
+                else:
+                    numbers[k].append(int(j))
+            k += 1
+        left_number = sum(numbers[0])
+        right_number = sum(numbers[1])
+        if left_number == right_number:
+            return f'{left_number} == {right_number}'
+        else:
+            return f'{left_number} != {right_number}'
+    return inner
 
 def format_output(*required_keys):
     pass
@@ -15,3 +35,4 @@ def format_output(*required_keys):
 
 def add_method_to_instance(klass):
     pass
+
