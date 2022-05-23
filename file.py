@@ -1,3 +1,6 @@
+from types import MethodType
+
+
 def greeter(func):
     def actual_greeter(*args):
         name = func(*args)
@@ -43,7 +46,7 @@ def format_output(*required_keys):
                         value += ' '
                     if j in received_dict:
                         if received_dict[j] == '':
-                            value = "Empty value"
+                            value = "Empty Value"
                         else:
                             value += received_dict[j]
                     else:
@@ -55,4 +58,10 @@ def format_output(*required_keys):
 
 
 def add_method_to_instance(klass):
-    pass
+    def decorator(func):
+        def inner(*args):
+            val = func()
+            return val
+        setattr(klass, func.__name__, inner)
+        return inner
+    return decorator
