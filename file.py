@@ -1,5 +1,7 @@
 def greeter(func):
-    pass
+    name = func()
+    str.capitalize(name)
+    return f'Aloha {name}'
 
 
 def sums_of_str_elements_are_equal(func):
